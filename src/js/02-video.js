@@ -1,11 +1,9 @@
-// імпортувати бібліотеку vimeo/player + імпортувати бібліотеку lodash.throttle
+// імпортувати бібліотеку vimeo/player + бібліотеку lodash.throttle
 import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
-// отримати посилання на iframe
+// отримати посилання на iframe + Ініціалізувати плеєр
 const iframe = document.querySelector('iframe');
-
-// // Ініціалізувати плеєр
 const player = new Player(iframe);
 
 // почати відстежувати подію timeupdate. Кожного разу, коли подія 'timeupdate' відбувається, код записує час відтворення у localStorage з ключем 'videoplayer-current-time'.
@@ -20,8 +18,11 @@ player.on(
 );
 
 // перевірти наявність значення в localStorage.
-const currentTime = localStorage.getItem('videoplayer-current-time');
+const curTime = localStorage.getItem('videoplayer-current-time');
 // Якщо значення є, то відтворення відео встановити на цей час за допомогою методу setCurrentTime().
-if (currentTime) {
-  player.setCurrentTime(currentTime);
+if (curTime) {
+  player.setCurrentTime(curTime);
 }
+
+//setItem(key, value) - створює новий, або оновлює вже існуючий запис у сховищі.
+//getItem(key) - повертає зі сховища значення з ключем key.
