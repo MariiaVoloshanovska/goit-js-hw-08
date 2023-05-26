@@ -5,9 +5,9 @@ const refs = {
 };
 thisFormInput();
 
-const allUsersInfo = {};
+let allUsersInfo = {};
 function forOnFormInput(e) {
-  const formStor = e.target;
+  let formStor = e.target;
   allUsersInfo[formStor.name] = formStor.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(allUsersInfo));
 }
