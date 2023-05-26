@@ -22,8 +22,8 @@ messageInput.value = feedbackForm.message || '';
 
 form.addEventListener('submit', formSubmit);
 
-function formSubmit(evt) {
-  evt.preventDefault();
+function formSubmit(e) {
+  e.preventDefault();
 
   const forFeedback = {
     email: emailInput.value,
