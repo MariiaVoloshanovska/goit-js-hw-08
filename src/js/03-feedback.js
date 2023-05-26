@@ -1,35 +1,37 @@
 import throttle from 'lodash.throttle';
 
-let refs = {
-  formEL: document.querySelector('.feedback-form'),
-};
-thisFormInput();
+const form = document.querySelector('.feedback-form');
+const emailInput = form.querySelector('input[name="email"]');
+const messageInput = form.querySelector('textarea[name="message"]');
+const STORAGE_KEY = 'feedback-form-state';
 
-let allUsersInfo = {};
-function forOnFormInput(e) {
-  let formStor = e.target;
-  allUsersInfo[formStor.name] = formStor.value;
-  localStorage.setItem('feedback-form-state', JSON.stringify(allUsersInfo));
-}
-function foroOFormSubmit(e) {
-  e.preventDefault();
+const storageFormTotal = throttle(() => {
+  const feedbackForm = {
+    email: emailInput.value,
+    message: messageInput.value,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(feedbackForm));
+}, 500);
 
-  e.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
-}
-function thisFormInput() {
-  try {
-    let formElements = refs.formEL.elements;
-    const savedUserInform = JSON.parse(
-      localStorage.getItem('feedback-form-state')
-    );
+form.addEventListener('input', storageFormTotal);
+const feedbackForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-    for (const field in savedUserInform) {
-      formElements[field].value = savedUserInform[field] || '';
-    }
-  } catch (error) {
-    console.log(error);
-  }
+//  Збереженні значення
+emailInput.value = feedbackForm.email || '';
+messageInput.value = feedbackForm.message || '';
+
+form.addEventListener('submit', formSubmit);
+
+function formSubmit(evt) {
+  evt.preventDefault();
+
+  const forFeedback = {
+    email: emailInput.value,
+    message: messageInput.value,
+  };
+  console.log(forFeedback);
+  // Очищистити локальне сховище & поля форми
+  localStorage.removeItem(STORAGE_KEY);
+  emailInput.value = '';
+  messageInput.value = '';
 }
-refs.formEL.addEventListener('input', throttle(forOnFormInput, 500));
-refs.formEL.addEventListener('submit', foroOFormSubmit);
