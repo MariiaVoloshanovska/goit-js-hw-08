@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle';
 
-const refs = {
+let refs = {
   formEL: document.querySelector('.feedback-form'),
 };
 thisFormInput();
