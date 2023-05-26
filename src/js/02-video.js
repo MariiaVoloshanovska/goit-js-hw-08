@@ -6,7 +6,6 @@ import throttle from 'lodash.throttle';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-// почати відстежувати подію timeupdate. Кожного разу, коли подія 'timeupdate' відбувається, код записує час відтворення у localStorage з ключем 'videoplayer-current-time'.
 player.on(
   'timeupdate',
   throttle(function (data) {
