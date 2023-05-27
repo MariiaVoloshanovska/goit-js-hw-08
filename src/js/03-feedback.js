@@ -4,11 +4,10 @@ const refs = {
   formEL: document.querySelector('.feedback-form'),
 };
 const STORAGE_KEY = 'feedback-form-state';
-
 formInput();
-
 //+ inform to localStorage
 let allUserInfo = {};
+
 function onFormInput(e) {
   let form = e.target;
   allUserInfo[form.name] = form.value;
@@ -25,7 +24,6 @@ function formInput() {
       formElements.email.value = savedUserInfo.email || '';
       formElements.message.value = savedUserInfo.message || '';
     }
-
     // for (const field in savedUserInfo) {
     //     formElements[field].value = savedUserInfo[field] || '';
     // }
