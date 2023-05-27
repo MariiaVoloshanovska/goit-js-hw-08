@@ -1,44 +1,3 @@
-import throttle from 'lodash.throttle';
-
-const refs = {
-  formELem: document.querySelector('.feedback-form'),
-};
-const STORAGE_KEY = 'feedback-form-state';
-
-populateFormInput();
-
-let allUserInfo = {};
-function onFormInput(e) {
-  let form = e.target;
-  allUserInfo[form.name] = form.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-}
-function onFormSubmit(e) {
-  e.preventDefault();
-
-  e.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
-}
-function populateFormInput() {
-  try {
-    let formElements = refs.formELem.elements;
-    const savedUserInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-    if (savedUserInfo) {
-      formElements.email.value = savedUserInfo.email || '';
-      formElements.message.value = savedUserInfo.message || '';
-    }
-
-    // for (const field in savedUserInfo) {
-    //     formElements[field].value = savedUserInfo[field] || '';
-    // }
-  } catch (error) {
-    console.log(error);
-  }
-}
-refs.formELem.addEventListener('input', throttle(onFormInput, 500));
-refs.formELem.addEventListener('submit', onFormSubmit);
-
 // import throttle from 'lodash.throttle';
 
 // const form = document.querySelector('.feedback-form');
@@ -76,3 +35,49 @@ refs.formELem.addEventListener('submit', onFormSubmit);
 //   emailInput.value = '';
 //   messageInput.value = '';
 // }
+
+import throttle from 'lodash.throttle';
+
+const refs = {
+  formEL: document.querySelector('.feedback-form'),
+};
+const STORAGE_KEY = 'feedback-form-state';
+
+populateFormInput();
+
+//+ inform to localStorage
+let allUserInfo = {};
+function onFormInput(evt) {
+  let form = evt.target;
+  allUserInfo[form.name] = form.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(allUserInfo));
+}
+
+//clean input and texterea after click on button submit
+function onFormButSubmit(evt) {
+  evt.preventDefault();
+
+  evt.currentTarget.reset();
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+//parse our localStorage and save clients info in our input and texterea
+function populateFormInput() {
+  try {
+    let formElements = refs.formEL.elements;
+    const savedUserInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+    if (savedUserInfo) {
+      formElements.email.value = savedUserInfo.email || '';
+      formElements.message.value = savedUserInfo.message || '';
+    }
+
+    // for (const field in savedUserInfo) {
+    //     formElements[field].value = savedUserInfo[field] || '';
+    // }
+  } catch (error) {
+    console.log(error);
+  }
+}
+refs.formEL.addEventListener('input', throttle(onFormInput, 500));
+refs.formEL.addEventListener('submit', onFormButSubmit);
