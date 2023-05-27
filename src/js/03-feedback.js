@@ -9,8 +9,8 @@ formInput();
 
 //+ inform to localStorage
 let allUserInfo = {};
-function onFormInput(evt) {
-  let form = evt.target;
+function onFormInput(e) {
+  let form = e.target;
   allUserInfo[form.name] = form.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allUserInfo));
 }
@@ -35,10 +35,10 @@ function formInput() {
 }
 
 //clean input and texterea after click on button Submit
-function onFormButSubmit(evt) {
-  evt.preventDefault();
+function onFormButSubmit(e) {
+  e.preventDefault();
 
-  evt.currentTarget.reset();
+  e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
