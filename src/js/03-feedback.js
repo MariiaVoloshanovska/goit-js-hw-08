@@ -5,7 +5,7 @@ const refs = {
 };
 const STORAGE_KEY = 'feedback-form-state';
 
-populateFormInput();
+formInput();
 
 //+ inform to localStorage
 let allUserInfo = {};
@@ -15,16 +15,8 @@ function onFormInput(evt) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allUserInfo));
 }
 
-//clean input and texterea after click on button submit
-function onFormButSubmit(evt) {
-  evt.preventDefault();
-
-  evt.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
-}
-
 //parse our localStorage and save clients info in our input and texterea
-function populateFormInput() {
+function formInput() {
   try {
     let formElements = refs.formEL.elements;
     const savedUserInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -41,6 +33,15 @@ function populateFormInput() {
     console.log(error);
   }
 }
+
+//clean input and texterea after click on button Submit
+function onFormButSubmit(evt) {
+  evt.preventDefault();
+
+  evt.currentTarget.reset();
+  localStorage.removeItem(STORAGE_KEY);
+}
+
 refs.formEL.addEventListener('input', throttle(onFormInput, 500));
 refs.formEL.addEventListener('submit', onFormButSubmit);
 
