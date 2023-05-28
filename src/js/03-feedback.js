@@ -44,3 +44,63 @@ form.addEventListener('input', throttle(onFormInput, 500));
 form.addEventListener('submit', onFormSubmit);
 
 getValueFromLocalStorage(); // Викликаємо функцію для заповнення полів форми зі збереженими значеннями з `localStorage`
+
+//========FROM OUR LESSON SOMETHING LIKE AS OLEKSII===========//
+// import throttle from 'lodash.throttle';
+
+// const contactFormEl = document.querySelector('.feedback-form');
+// const userInfo = {};
+
+// // Функція, яка оновлює дані в локальному сховищі з обмеженням частоти виклику не частіше ніж раз на 500 мілісекунд
+// const updateLocalStorage = throttle(() => {
+//   localStorage.setItem('feedback-form-state', JSON.stringify(userInfo));
+// }, 500);
+
+// // Функція, яка заповнює поля форми даними з локального сховища, якщо вони є
+// const fillFormFields = () => {
+//   // Отримуємо дані з локального сховища і розбираємо рядок JSON в об'єкт
+//   const formDataFromLS = JSON.parse(
+//     localStorage.getItem('feedback-form-state')
+//   );
+
+//   if (formDataFromLS === null) {
+//     return;
+//   }
+
+//   // Заповнюємо поля форми значеннями з об'єкта formDataFromLS та оновлюємо userInfo
+//   for (const key in formDataFromLS) {
+//     contactFormEl.elements[key].value = formDataFromLS[key];
+//     userInfo[key] = formDataFromLS[key];
+//   }
+// };
+
+// // Обробник події зміни значення в полях форми
+// const onFormInputChange = event => {
+//   const inputField = event.target;
+//   const fieldValue = inputField.value;
+//   const fieldName = inputField.name;
+
+//   // Зберігаємо значення поля в об'єкт userInfo
+//   userInfo[fieldName] = fieldValue;
+//   // Оновлюємо локальне сховище з обмеженням частоти виклику
+//   updateLocalStorage();
+// };
+
+// // Обробник події відправки форми
+// const onFormSubmit = event => {
+//   event.preventDefault();
+
+//   // console.log('Form submitted with the following data:');
+//   // console.log(userInfo);
+
+//   // Скидаємо значення полів форми та видаляємо дані з локального сховища
+//   contactFormEl.reset();
+//   localStorage.removeItem('feedback-form-state');
+// };
+
+// // Додаємо обробники подій до форми
+// contactFormEl.addEventListener('input', onFormInputChange);
+// contactFormEl.addEventListener('submit', onFormSubmit);
+
+// // Заповнюємо поля форми при завантаженні сторінки
+// fillFormFields();
